@@ -50,8 +50,9 @@ export default function SearchBar() {
     function handleInputChange(e) {
 
         if(e.target.value === ""){
-            setInputText([])
             setShowSearch(false)
+            setInputText([])
+            
             return
         }
 

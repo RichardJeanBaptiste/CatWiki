@@ -14,15 +14,23 @@ def connect():
 
 @app.route("/search/<query>")
 def search(query):
+    print(query)
     thisList = []
 
-    apiCall = 'https://api.thecatapi.com/v1/breeds/search?q={}'
-    apiCall = apiCall.format(query)
+    if(query == ""):
+        return jsonify(thisList)
+    else:
+        apiCall = 'https://api.thecatapi.com/v1/breeds/search?q={}'
+        apiCall = apiCall.format(query)
 
-    req = requests.get(apiCall)
-    catJson = json.loads(req.content)
+        req = requests.get(apiCall)
+        catJson = json.loads(req.content)
 
-    for x in catJson:
-        thisList.append(x['name'])
+        for x in catJson:
+            thisList.append(x['name'])
 
-    return jsonify(thisList)
+        return jsonify(thisList)
+
+    
+
+    
