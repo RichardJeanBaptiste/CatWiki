@@ -33,20 +33,21 @@ export default function SearchBar() {
 
     const classes = useStyles();
 
-    const [inputText, setInputText] = useState("");
+    const [inputText, setInputText] = useState([]);
+
 
     const [showSearch, setShowSearch] = useState(false);
 
     function handleInputChange(e) {
 
         if(e.target.value === ""){
-            setInputText("")
+            setInputText([])
             setShowSearch(false)
             return
         }
 
         fetch(`/search/${e.target.value}`)
-            .then(response => response.text())
+            .then(response => response.json())
             .then(data => {
                 console.log(data)
                 setShowSearch(true)
@@ -54,14 +55,19 @@ export default function SearchBar() {
             })     
     }
 
+    
+
     function SearchResults() {
 
-        
 
         if(showSearch){
             return (
-                <Box className={classes.searchBoxStyle} onMouseLeave={() => setShowSearch(false)}>
-                    {inputText}
+                <Box className={classes.searchBoxStyle}>
+                    {inputText.map((name, i) => {
+                        return(
+                            <li key={i}>{name}</li>
+                        )
+                    })}
                 </Box>
             )
         }
