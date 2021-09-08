@@ -9,3 +9,8 @@ def hello():
 @app.route("/hello")
 def connect():
     return "Hello from Server"
+
+@app.route("/search/<query>")
+def search(query):
+    print(query)
+    return str(query)

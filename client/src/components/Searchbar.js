@@ -10,6 +10,13 @@ const useStyles = makeStyles({
         borderRadius: '59px',
         borderStyle: 'hidden',
         width: '30%',
+    },
+    searchBoxStyle: {
+        backgroundColor: 'white',
+        borderRadius: '24px',
+        marginTop: '2%',
+        width: '365px',
+        height: '350px',
     }
 })
 
@@ -28,8 +35,39 @@ export default function SearchBar() {
 
     const [inputText, setInputText] = useState("");
 
+    const [showSearch, setShowSearch] = useState(false);
+
     function handleInputChange(e) {
-        setInputText(e.target.value)
+
+        if(e.target.value === ""){
+            setInputText("")
+            setShowSearch(false)
+            return
+        }
+
+        fetch(`/search/${e.target.value}`)
+            .then(response => response.text())
+            .then(data => {
+                console.log(data)
+                setShowSearch(true)
+                setInputText(data)
+            })     
+    }
+
+    function SearchResults() {
+
+        
+
+        if(showSearch){
+            return (
+                <Box className={classes.searchBoxStyle} onMouseLeave={() => setShowSearch(false)}>
+                    {inputText}
+                </Box>
+            )
+        }
+
+        return <></>
+        
     }
     
     return (
@@ -43,6 +81,7 @@ export default function SearchBar() {
                   }}
                 onChange={handleInputChange}
             />
+            <SearchResults/>
         </>
     )
 }
