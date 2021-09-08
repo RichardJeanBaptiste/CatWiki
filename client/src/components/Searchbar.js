@@ -15,8 +15,17 @@ const useStyles = makeStyles({
         backgroundColor: 'white',
         borderRadius: '24px',
         marginTop: '2%',
-        width: '365px',
-        height: '350px',
+        width: '325px',
+        height: '150px',
+    },
+    listStyle: {
+        listStyle: 'none',
+    },
+    listContainer: {
+        width: '275px',
+        height: '150px',
+        overflow: 'hidden',
+        overflowY: 'scroll'
     }
 })
 
@@ -63,11 +72,14 @@ export default function SearchBar() {
         if(showSearch){
             return (
                 <Box className={classes.searchBoxStyle}>
-                    {inputText.map((name, i) => {
-                        return(
-                            <li key={i}>{name}</li>
-                        )
-                    })}
+                    <ul className={classes.listContainer}>
+                        {inputText.map((name, i) => {
+                            return(
+                                <li key={i} className={classes.listStyle}>{name}</li>
+                            )
+                        })} 
+                    </ul>
+                               
                 </Box>
             )
         }
