@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
@@ -16,14 +16,14 @@ const useStyles = makeStyles({
         borderRadius: '24px',
         marginTop: '2%',
         width: '325px',
-        height: '150px',
+        height: '160px',
     },
     listStyle: {
         listStyle: 'none',
     },
     listContainer: {
         width: '275px',
-        height: '150px',
+        height: '135px',
         overflow: 'hidden',
         overflowY: 'scroll'
     }
@@ -44,29 +44,34 @@ export default function SearchBar() {
 
     const [inputText, setInputText] = useState([]);
 
-
     const [showSearch, setShowSearch] = useState(false);
 
-    function handleInputChange(e) {
+    const [query, setQuery] = useState("");
 
-        if(e.target.value === ""){
+    useEffect(() => {
+
+        if(query === ""){
             setShowSearch(false)
-            setInputText([])
-            
-            return
         }
+     
+    },[query,inputText,showSearch])
 
-        fetch(`/search/${e.target.value}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                setShowSearch(true)
-                setInputText(data)
-            })     
+
+    function handleInputChange(e) {
+        setQuery(e.target.value) 
+
+        if(e.target.value !== ""){
+            fetch(`/search/${e.target.value}`)
+                .then(response => response.json())
+                .then(data => {
+                    //console.log(data)
+                    setInputText(data)
+                    setShowSearch(true)
+                })
+        }
     }
-
-    
-
+  
+  
     function SearchResults() {
 
 

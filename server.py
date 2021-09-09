@@ -23,7 +23,8 @@ def search(query):
         apiCall = 'https://api.thecatapi.com/v1/breeds/search?q={}'
         apiCall = apiCall.format(query)
 
-        req = requests.get(apiCall)
+        
+        req = requests.get(apiCall, headers={'x-api-key':'d309c8b6-cead-41f5-a176-afcc44ad1658'})
         catJson = json.loads(req.content)
 
         for x in catJson:
