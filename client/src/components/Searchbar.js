@@ -19,7 +19,11 @@ const useStyles = makeStyles({
         height: '160px',
     },
     listStyle: {
+        marginLeft: '-2%',
         listStyle: 'none',
+        fontSize: '18px',
+        marginBottom: '2%',
+        lineHeight: '22px',
     },
     listContainer: {
         width: '275px',
@@ -54,7 +58,7 @@ export default function SearchBar() {
             setShowSearch(false)
         }
      
-    },[query,inputText,showSearch])
+    },[query,showSearch])
 
 
     function handleInputChange(e) {
@@ -74,6 +78,22 @@ export default function SearchBar() {
   
     function SearchResults() {
 
+        function Search(props) {
+
+            const colors = ["#FFFFFF", "rgba(151, 151, 151, 0.1)"]
+            const [hoverBackground, setHoverBackground] = useState(colors[0])
+
+            return (
+                <li
+                    key={props.key}
+                    style={{listStyle:'none',backgroundColor: hoverBackground}}
+                    onMouseOver={() => {setHoverBackground(colors[1])}}
+                    onMouseLeave={() => {setHoverBackground(colors[0])}}
+                >
+                    {props.catName}
+                </li>
+            )
+        }
 
         if(showSearch){
             return (
@@ -81,7 +101,11 @@ export default function SearchBar() {
                     <ul className={classes.listContainer}>
                         {inputText.map((name, i) => {
                             return(
-                                <li key={i} className={classes.listStyle}>{name}</li>
+                                <Search
+                                    key={i}
+                                    className={classes.listStyle} 
+                                    catName={name}
+                                />
                             )
                         })} 
                     </ul>
