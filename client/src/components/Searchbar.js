@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, TextField } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
@@ -83,14 +84,18 @@ export default function SearchBar() {
             const colors = ["#FFFFFF", "rgba(151, 151, 151, 0.1)"]
             const [hoverBackground, setHoverBackground] = useState(colors[0])
 
+            const routeLink = `/Info/${props.catName}`;
+
             return (
                 <li
-                    key={props.key}
+                    //key={props.key}
                     style={{listStyle:'none',backgroundColor: hoverBackground}}
                     onMouseOver={() => {setHoverBackground(colors[1])}}
                     onMouseLeave={() => {setHoverBackground(colors[0])}}
                 >
-                    {props.catName}
+                    <Link to={routeLink} style={{listStyle: 'none', textDecoration:'none', color: 'black'}}>
+                        {props.catName}
+                    </Link>
                 </li>
             )
         }

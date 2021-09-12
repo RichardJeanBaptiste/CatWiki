@@ -1,9 +1,220 @@
-import { React } from 'react';
+import { React, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import { Box, Grid, Typography } from '@material-ui/core';
+import CatWiki from './CatWikiIcon';
 
 
-export default function CatInfo(props) {
-    return(
+const useStyles = makeStyles({
+    root: {
+        display: 'flex',
+        flexDirection: 'row',
+        position: 'absolute',
+        left: '12%',
+        top: '15%',
+    },
+    profImageStyle: {
+        borderRadius: '24px',
+        width: '25em',
+        height: '22em',
+    },
+    infoStyle: {
+        display: 'flex',
+        flexDirection: 'column',
+        marginLeft: '8%',
+        marginTop: '-5%'
+    },
+    dataBarStyle: {
+        width: '60px',
+        height: '12px',
+        borderRadius: '8px',
+        marginRight: '2%',
+    },
+    photoRowStyle: {
+        position: 'absolute',
+        bottom: '-100%',
+    }
+})
+
+
+
+
+function DisplayContent(props) {
+
+    const classes = useStyles();
+
+    const [ name, desc, temper, origin, lifeSpan, adaptability, affection, childFriendly, grooming, intelligence, healthIssues, socialNeeds, strangerFriendly] = props.Info;
+
+    
+    return (
+            <>
+                <Box style={{marginLeft: '3.5%', marginTop:'2%'}}>
+                    <CatWiki fill='#291507' width="10%" height="10%"/>
+                </Box>
+                <Box className={classes.root}>
+                    <img className={classes.profImageStyle} src={props.profileImg} alt="" width='30%' height='20%'/>
+                    <Box className={classes.infoStyle}>
+                        <p style={{color: '#291507', fontSize:'55px', fontStyle:'normal'}}>{name}</p>
+                        <p style={{marginTop:'-2.5%'}}>{desc}</p>
+                        <Box style={{display: 'flex', flexDirection:'row'}}>
+                            <p style={{fontWeight:'bold'}}>Temperament: </p>
+                            <p style={{marginLeft: '1.5%'}}> {temper}</p>
+                        </Box>
+                        <Box style={{display: 'flex', flexDirection:'row'}}>
+                            <p style={{fontWeight:'bold'}}>Origin: </p>
+                            <p style={{marginLeft: '1.5%'}}>{origin}</p>
+                        </Box>
+                        <Box style={{display: 'flex', flexDirection:'row'}}>
+                            <p style={{fontWeight:'bold'}}>Life Span: </p>
+                            <p style={{marginLeft: '1.5%'}}>{lifeSpan}</p>
+                        </Box>
+                        <DataBar info={["Adaptability", adaptability]}/>
+                        <DataBar info={["Affection level", affection]}/>
+                        <DataBar info={["Child Friendly", childFriendly]}/>
+                        <DataBar info={["Grooming", grooming]}/>
+                        <DataBar info={["Intelligence", intelligence]}/>
+                        <DataBar info={["Health Issues", healthIssues]}/>
+                        <DataBar info={["Social needs", socialNeeds]}/>
+                        <DataBar info={["Stranger friendly", strangerFriendly]}/>
+                    </Box>
+                </Box>  
+                    <Box className={classes.photoRowStyle}>
+                        <h3>Other Photos</h3>
+                        <Grid direction="row" container spacing={6}>
+                            <Grid item sm={3}>D</Grid>
+                            <Grid item sm={3}>E</Grid>
+                            <Grid item sm={3}>F</Grid>
+                            <Grid item sm={3}>G</Grid> 
+                        </Grid>
+                    </Box>
+            </>
+            )
+}
+
+function DataBar(props) {
+
+    const classes = useStyles();
+
+    const [title, count] = props.info;
+
+    function changeBackground(num){
+        if(num <= count){
+            return '#544439'
+        }else{
+            return '#E0E0E0'
+        }
+
+    }
+   
+
+    return (
         <>
+            <Box style={{display: 'flex', flexDirection:'row', marginTop:'2%'}}>
+                <p style={{fontWeight:'bold'}}>{title}:</p>
+                <Box style={{display: 'flex', flexDirection:'row', marginLeft:'5%', marginTop:'3%'}}>
+                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(1)}}/>
+                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(2)}}/>
+                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(3)}}/>
+                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(4)}}/>
+                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(5)}}/>  
+                </Box>
+                
+            </Box>
         </>
     )
 }
+
+
+
+export default function CatInfo(props) {
+
+    //const classes = useStyles();
+
+    let { id } = useParams()
+
+
+    const [ catData, setCatData ] = useState([])
+
+    const [ imageList, setImageList ] = useState([])
+
+    const [ isLoaded, setIsLoaded ] = useState(false)
+
+    const [ profileImg, setProfileImg ] = useState("");
+
+    const [ name, setName ] = useState("");
+
+    const [ desc, setDesc ] = useState("");
+
+    const [ temper, setTemper ] = useState("");
+    
+    useEffect(() => {
+
+        if(!isLoaded){
+            
+            fetch(`/find/${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+
+                    let x = []
+                    x.push(data[0].name)
+                    x.push(data[0].description)
+                    x.push(data[0].temperament)
+                    x.push(data[0].origin)
+                    x.push(data[0].life_span)
+                    x.push(data[0].adaptability)
+                    x.push(data[0].affection_level)
+                    x.push(data[0].child_friendly)
+                    x.push(data[0].grooming)
+                    x.push(data[0].intelligence)
+                    x.push(data[0].health_issues)
+                    x.push(data[0].social_needs)
+                    x.push(data[0].stranger_friendly)
+                    setCatData(x)
+                })
+            
+            fetch(`/images/${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    setProfileImg(data[0].url)
+                    setImageList(data)
+                })
+                .then(() => {
+                    setIsLoaded(true)
+                })
+        }
+
+    },[isLoaded,id,setCatData,setImageList,setIsLoaded,setName, setDesc, setTemper])
+
+    if(isLoaded){
+
+        return (
+            <DisplayContent Info={catData} profileImg={profileImg} name={name} description={desc} temperament={temper}/>
+        )
+    }else{
+        return (
+            <>
+            </>
+        )
+    }
+}
+
+/*
+
+
+<Typography>Other Photos</Typography>
+                <Grid direction="row" container spacing={3}>
+                    <Grid item md={6} sm={3}>
+                        D
+                    </Grid>
+                    <Grid item md={6} sm={3}>
+                        E
+                    </Grid>
+                    <Grid item md={6} sm={3}>
+                        F
+                    </Grid>
+                    <Grid item md={6} sm={3}>
+                        G
+                    </Grid>
+                </Grid>
+*/

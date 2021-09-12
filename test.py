@@ -2,13 +2,33 @@ import requests
 import json
 
 
-req = requests.get('https://api.thecatapi.com/v1/breeds/search?q=ame')
+# req = requests.get('https://api.thecatapi.com/v1/breeds/search?limit=5&name=American%20Bobtail',headers={'x-api-key':'d309c8b6-cead-41f5-a176-afcc44ad1658'})
 
-catJson = json.loads(req.content)
+# catJson = json.loads(req.content)
 
-thisList = []
 
-for x in catJson:
-    thisList.append(x['name'])
+# print(catJson)
 
-print(thisList)
+
+# apiCall = 'https://api.thecatapi.com/v1/breeds/search?limit=5&q={}'.format(name)
+
+
+imageCall = 'https://api.thecatapi.com/v1/images/search?limit=5&name=Aegean'
+imageReq = requests.get(imageCall, headers={'x-api-key':'d309c8b6-cead-41f5-a176-afcc44ad1658'})
+imageJson = json.loads(imageReq.content)
+
+print("--------------------------------------------")
+
+print(imageJson)
+
+
+
+
+
+
+
+
+
+
+
+
