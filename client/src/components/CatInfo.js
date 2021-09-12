@@ -1,8 +1,9 @@
 import { React, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Grid, Typography } from '@material-ui/core';
-import CatWiki from './CatWikiIcon';
+import { Box, Grid, } from '@material-ui/core';
+import Header from './Header';
+//import Footer from './Footer';
 
 
 const useStyles = makeStyles({
@@ -10,18 +11,19 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'row',
         position: 'absolute',
-        left: '12%',
+        left: '19%',
         top: '15%',
     },
     profImageStyle: {
         borderRadius: '24px',
-        width: '25em',
-        height: '22em',
+        width: '20em',
+        height: '20em',
+        marginLeft:'-5%',
     },
     infoStyle: {
         display: 'flex',
         flexDirection: 'column',
-        marginLeft: '8%',
+        marginLeft: '10%',
         marginTop: '-5%'
     },
     dataBarStyle: {
@@ -32,10 +34,48 @@ const useStyles = makeStyles({
     },
     photoRowStyle: {
         position: 'absolute',
-        bottom: '-100%',
+        bottom: '-125%',
+        left: '12%'
+    },
+    imageStyle: {
+        width: '14em',
+        height: '12em',
+        borderRadius: '24px',
     }
 })
 
+function DataBar(props) {
+
+    const classes = useStyles();
+
+    const [title, count] = props.info;
+
+    function changeBackground(num){
+        if(num <= count){
+            return '#544439'
+        }else{
+            return '#E0E0E0'
+        }
+
+    }
+   
+
+    return (
+        <>
+            <Box style={{display: 'flex', flexDirection:'row', marginTop:'2%'}}>
+                <p style={{fontWeight:'bold'}}>{title}:</p>
+                <Box style={{display: 'flex', flexDirection:'row', marginLeft:'5%', marginTop:'2.2%'}}>
+                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(1)}}/>
+                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(2)}}/>
+                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(3)}}/>
+                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(4)}}/>
+                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(5)}}/>  
+                </Box>
+                
+            </Box>
+        </>
+    )
+}
 
 
 
@@ -45,17 +85,16 @@ function DisplayContent(props) {
 
     const [ name, desc, temper, origin, lifeSpan, adaptability, affection, childFriendly, grooming, intelligence, healthIssues, socialNeeds, strangerFriendly] = props.Info;
 
-    
+    const ImageList = props.ImageList;
+
     return (
             <>
-                <Box style={{marginLeft: '3.5%', marginTop:'2%'}}>
-                    <CatWiki fill='#291507' width="10%" height="10%"/>
-                </Box>
+                <Header/>
                 <Box className={classes.root}>
-                    <img className={classes.profImageStyle} src={props.profileImg} alt="" width='30%' height='20%'/>
+                    <img className={classes.profImageStyle} src={props.profileImg} alt=""/>
                     <Box className={classes.infoStyle}>
                         <p style={{color: '#291507', fontSize:'55px', fontStyle:'normal'}}>{name}</p>
-                        <p style={{marginTop:'-2.5%'}}>{desc}</p>
+                        <p style={{marginTop:'-2.5%', width: '65%'}}>{desc}</p>
                         <Box style={{display: 'flex', flexDirection:'row'}}>
                             <p style={{fontWeight:'bold'}}>Temperament: </p>
                             <p style={{marginLeft: '1.5%'}}> {temper}</p>
@@ -79,49 +118,23 @@ function DisplayContent(props) {
                     </Box>
                 </Box>  
                     <Box className={classes.photoRowStyle}>
-                        <h3>Other Photos</h3>
+                        <h2 style={{color:'#291507', fontSize: '36px', fontStyle:'normal'}}>Other Photos</h2>
                         <Grid direction="row" container spacing={6}>
-                            <Grid item sm={3}>D</Grid>
-                            <Grid item sm={3}>E</Grid>
-                            <Grid item sm={3}>F</Grid>
-                            <Grid item sm={3}>G</Grid> 
+                            <Grid item sm={3}><img src={ImageList[0].url} alt="" className={classes.imageStyle}/></Grid>
+                            <Grid item sm={3}><img src={ImageList[1].url} alt="" className={classes.imageStyle}/></Grid>
+                            <Grid item sm={3}><img src={ImageList[2].url} alt="" className={classes.imageStyle}/></Grid>
+                            <Grid item sm={3}><img src={ImageList[3].url} alt="" className={classes.imageStyle}/></Grid> 
+                        </Grid>
+                        <Grid direction="row" container spacing={6} style={{marginTop: '1.5%'}}>
+                            <Grid item sm={3}><img src={ImageList[4].url} alt="" className={classes.imageStyle}/></Grid>
+                            <Grid item sm={3}><img src={ImageList[5].url} alt="" className={classes.imageStyle}/></Grid>
+                            <Grid item sm={3}><img src={ImageList[6].url} alt="" className={classes.imageStyle}/></Grid>
+                            <Grid item sm={3}><img src={ImageList[7].url} alt="" className={classes.imageStyle}/></Grid> 
                         </Grid>
                     </Box>
+                    
             </>
             )
-}
-
-function DataBar(props) {
-
-    const classes = useStyles();
-
-    const [title, count] = props.info;
-
-    function changeBackground(num){
-        if(num <= count){
-            return '#544439'
-        }else{
-            return '#E0E0E0'
-        }
-
-    }
-   
-
-    return (
-        <>
-            <Box style={{display: 'flex', flexDirection:'row', marginTop:'2%'}}>
-                <p style={{fontWeight:'bold'}}>{title}:</p>
-                <Box style={{display: 'flex', flexDirection:'row', marginLeft:'5%', marginTop:'3%'}}>
-                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(1)}}/>
-                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(2)}}/>
-                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(3)}}/>
-                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(4)}}/>
-                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(5)}}/>  
-                </Box>
-                
-            </Box>
-        </>
-    )
 }
 
 
@@ -189,7 +202,7 @@ export default function CatInfo(props) {
     if(isLoaded){
 
         return (
-            <DisplayContent Info={catData} profileImg={profileImg} name={name} description={desc} temperament={temper}/>
+            <DisplayContent Info={catData} profileImg={profileImg} ImageList={imageList} name={name} description={desc} temperament={temper}/>
         )
     }else{
         return (
