@@ -1,29 +1,41 @@
 import requests
 import json
+from pymongo import MongoClient
+import pymongo
+
+client = MongoClient("mongodb+srv://Richinbk:DzIMGBugcZjdMofB@searches.llyga.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+db = client.test
+posts = db.posts
+
+'''
+x = {
+        "name": 'Rich',
+        "url": "safaefa",
+        "searches": 1
+    }
+    
 
 
-# req = requests.get('https://api.thecatapi.com/v1/breeds/search?limit=5&name=American%20Bobtail',headers={'x-api-key':'d309c8b6-cead-41f5-a176-afcc44ad1658'})
-
-# catJson = json.loads(req.content)
+posts.insert_one(x)
 
 
-# print(catJson)
+posts.update_one({"name":"Rich"}, {"$set": {"searches": 3}})
+ 
+for post in posts.find().sort('searches', pymongo.DESCENDING):
+    print(post)
 
+'''
 
-# apiCall = 'https://api.thecatapi.com/v1/breeds/search?limit=5&q={}'.format(name)
+'''
+for x in posts.find({"name":"Rich"}):
+    print(x['searches'])
+'''
 
-
-imageCall = 'https://api.thecatapi.com/v1/images/search?limit=5&name=Aegean'
-imageReq = requests.get(imageCall, headers={'x-api-key':'d309c8b6-cead-41f5-a176-afcc44ad1658'})
-imageJson = json.loads(imageReq.content)
-
-print("--------------------------------------------")
-
-print(imageJson)
-
-
-
-
+def update_search(name):
+    #check if entry already exists
+    #if entry doesnt exist create
+    #if entry does exist add search +=1
+    print(name)
 
 
 

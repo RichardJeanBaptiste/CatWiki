@@ -1,8 +1,9 @@
 import { React, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Grid, Typography } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import CatWiki from './CatWikiIcon';
+
 
 
 const useStyles = makeStyles({
@@ -32,7 +33,10 @@ const useStyles = makeStyles({
     },
     photoRowStyle: {
         position: 'absolute',
-        bottom: '-100%',
+        bottom: '-195%',
+        left: '51%',
+        transform: 'translate(-50%, -50%)',
+        width: '68%',
     }
 })
 
@@ -49,7 +53,9 @@ function DisplayContent(props) {
     return (
             <>
                 <Box style={{marginLeft: '3.5%', marginTop:'2%'}}>
-                    <CatWiki fill='#291507' width="10%" height="10%"/>
+                    <Link to={"/"}>
+                        <CatWiki fill='#291507' width="10%" height="10%"/>
+                    </Link>
                 </Box>
                 <Box className={classes.root}>
                     <img className={classes.profImageStyle} src={props.profileImg} alt="" width='30%' height='20%'/>
@@ -79,12 +85,18 @@ function DisplayContent(props) {
                     </Box>
                 </Box>  
                     <Box className={classes.photoRowStyle}>
-                        <h3>Other Photos</h3>
+                        <h3 style={{fontSize: '36px', color:'#291507'}}>Other Photos</h3>
                         <Grid direction="row" container spacing={6}>
-                            <Grid item sm={3}>D</Grid>
-                            <Grid item sm={3}>E</Grid>
-                            <Grid item sm={3}>F</Grid>
-                            <Grid item sm={3}>G</Grid> 
+                            <Grid item sm={3}><img src={props.ImageList[1].url} alt="D" width='200' height='220' style={{borderRadius: '24px'}}/></Grid>
+                            <Grid item sm={3}><img src={props.ImageList[2].url} alt="D" width='200' height='220' style={{borderRadius: '24px'}}/></Grid>
+                            <Grid item sm={3}><img src={props.ImageList[3].url} alt="D" width='200' height='220' style={{borderRadius: '24px'}}/></Grid>
+                            <Grid item sm={3}><img src={props.ImageList[4].url} alt="D" width='200' height='220' style={{borderRadius: '24px'}}/></Grid> 
+                        </Grid>
+                        <Grid direction="row" container spacing={6} style={{ marginTop: '2%'}}>
+                            <Grid item sm={3}><img src={props.ImageList[5].url} alt="D" width='200' height='220' style={{borderRadius: '24px'}}/></Grid>
+                            <Grid item sm={3}><img src={props.ImageList[6].url} alt="D" width='200' height='220' style={{borderRadius: '24px'}}/></Grid>
+                            <Grid item sm={3}><img src={props.ImageList[7].url} alt="D" width='200' height='220' style={{borderRadius: '24px'}}/></Grid>
+                            <Grid item sm={3}><img src={props.ImageList[8].url} alt="D" width='200' height='220' style={{borderRadius: '24px'}}/></Grid> 
                         </Grid>
                     </Box>
             </>
@@ -141,11 +153,7 @@ export default function CatInfo(props) {
 
     const [ profileImg, setProfileImg ] = useState("");
 
-    const [ name, setName ] = useState("");
-
-    const [ desc, setDesc ] = useState("");
-
-    const [ temper, setTemper ] = useState("");
+    
     
     useEffect(() => {
 
@@ -184,12 +192,12 @@ export default function CatInfo(props) {
                 })
         }
 
-    },[isLoaded,id,setCatData,setImageList,setIsLoaded,setName, setDesc, setTemper])
+    },[isLoaded,id,setCatData,setImageList,setIsLoaded])
 
     if(isLoaded){
 
         return (
-            <DisplayContent Info={catData} profileImg={profileImg} name={name} description={desc} temperament={temper}/>
+            <DisplayContent Info={catData} ImageList={imageList} profileImg={profileImg} />
         )
     }else{
         return (
