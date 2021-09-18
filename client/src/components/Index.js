@@ -4,6 +4,8 @@ import { Box, Typography } from '@material-ui/core';
 import HeroImageLg from '../assets/HeroImagemd.png';
 import CatWiki from '../components/CatWikiIcon';
 import SearchBar from '../components/Searchbar';
+import Header from './Header';
+//import Footer from './Footer';
 
 
 
@@ -55,7 +57,7 @@ export default function Index() {
     const classes = useStyles();
     return (
         <Box className={classes.root}>
-        <CatWiki fill='#291507' width="10%" height="10%"/>
+          <Header/>
   
         <Box className={classes.upperRoot}>
             <Box className={classes.titleStyle}>
@@ -78,6 +80,7 @@ export default function Index() {
             </Typography>
           </div>
         </Box>
+        
       </Box>
     )
 }

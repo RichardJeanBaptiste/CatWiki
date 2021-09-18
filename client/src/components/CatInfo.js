@@ -11,18 +11,19 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'row',
         position: 'absolute',
-        left: '12%',
+        left: '19%',
         top: '15%',
     },
     profImageStyle: {
         borderRadius: '24px',
-        width: '25em',
-        height: '22em',
+        width: '20em',
+        height: '20em',
+        marginLeft:'-5%',
     },
     infoStyle: {
         display: 'flex',
         flexDirection: 'column',
-        marginLeft: '8%',
+        marginLeft: '10%',
         marginTop: '-5%'
     },
     dataBarStyle: {
@@ -40,6 +41,38 @@ const useStyles = makeStyles({
     }
 })
 
+function DataBar(props) {
+
+    const classes = useStyles();
+
+    const [title, count] = props.info;
+
+    function changeBackground(num){
+        if(num <= count){
+            return '#544439'
+        }else{
+            return '#E0E0E0'
+        }
+
+    }
+   
+
+    return (
+        <>
+            <Box style={{display: 'flex', flexDirection:'row', marginTop:'2%'}}>
+                <p style={{fontWeight:'bold'}}>{title}:</p>
+                <Box style={{display: 'flex', flexDirection:'row', marginLeft:'5%', marginTop:'2.2%'}}>
+                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(1)}}/>
+                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(2)}}/>
+                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(3)}}/>
+                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(4)}}/>
+                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(5)}}/>  
+                </Box>
+                
+            </Box>
+        </>
+    )
+}
 
 
 
@@ -49,7 +82,8 @@ function DisplayContent(props) {
 
     const [ name, desc, temper, origin, lifeSpan, adaptability, affection, childFriendly, grooming, intelligence, healthIssues, socialNeeds, strangerFriendly] = props.Info;
 
-    
+    const ImageList = props.ImageList;
+
     return (
             <>
                 <Box style={{marginLeft: '3.5%', marginTop:'2%'}}>
@@ -58,10 +92,10 @@ function DisplayContent(props) {
                     </Link>
                 </Box>
                 <Box className={classes.root}>
-                    <img className={classes.profImageStyle} src={props.profileImg} alt="" width='30%' height='20%'/>
+                    <img className={classes.profImageStyle} src={props.profileImg} alt=""/>
                     <Box className={classes.infoStyle}>
                         <p style={{color: '#291507', fontSize:'55px', fontStyle:'normal'}}>{name}</p>
-                        <p style={{marginTop:'-2.5%'}}>{desc}</p>
+                        <p style={{marginTop:'-2.5%', width: '65%'}}>{desc}</p>
                         <Box style={{display: 'flex', flexDirection:'row'}}>
                             <p style={{fontWeight:'bold'}}>Temperament: </p>
                             <p style={{marginLeft: '1.5%'}}> {temper}</p>
@@ -98,42 +132,9 @@ function DisplayContent(props) {
                             <Grid item sm={3}><img src={props.ImageList[7].url} alt="D" width='200' height='220' style={{borderRadius: '24px'}}/></Grid>
                             <Grid item sm={3}><img src={props.ImageList[8].url} alt="D" width='200' height='220' style={{borderRadius: '24px'}}/></Grid> 
                         </Grid>
-                    </Box>
+                    </Box>      
             </>
-            )
-}
-
-function DataBar(props) {
-
-    const classes = useStyles();
-
-    const [title, count] = props.info;
-
-    function changeBackground(num){
-        if(num <= count){
-            return '#544439'
-        }else{
-            return '#E0E0E0'
-        }
-
-    }
-   
-
-    return (
-        <>
-            <Box style={{display: 'flex', flexDirection:'row', marginTop:'2%'}}>
-                <p style={{fontWeight:'bold'}}>{title}:</p>
-                <Box style={{display: 'flex', flexDirection:'row', marginLeft:'5%', marginTop:'3%'}}>
-                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(1)}}/>
-                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(2)}}/>
-                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(3)}}/>
-                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(4)}}/>
-                    <Box className={classes.dataBarStyle} style={{backgroundColor: changeBackground(5)}}/>  
-                </Box>
-                
-            </Box>
-        </>
-    )
+        )
 }
 
 
