@@ -31,11 +31,28 @@ for x in posts.find({"name":"Rich"}):
     print(x['searches'])
 '''
 
-def update_search(name):
+test = {
+    "name": "Pete",
+    "url": "gokgokgog.com",
+    "searches": 0,
+}
+
+def update_search(test):
     #check if entry already exists
     #if entry doesnt exist create
     #if entry does exist add search +=1
-    print(name)
+    name = test['name']
+
+    check = posts.find_one({"name": name})
+
+    if(str(check) == "None"):
+        posts.insert_one(test)
+    else:
+        temp = int(check['searches']) + 1
+        posts.update_one({"name":name}, {"$set": {"searches": temp}})
+    
+
+update_search(test)
 
 
 
