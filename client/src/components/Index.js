@@ -1,6 +1,6 @@
-import {React} from 'react';
+import { React, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Typography } from '@material-ui/core';
+import { Box, Typography, Grid } from '@material-ui/core';
 import HeroImageLg from '../assets/HeroImagemd.png';
 import CatWiki from '../components/CatWikiIcon';
 import SearchBar from '../components/Searchbar';
@@ -52,9 +52,51 @@ const useStyles = makeStyles({
 const introText = " Get to know more about your \n cat breed ";
 const subHeadingText = " 66+ Breeds For you \n to discover ";
 
+
+
+
 export default function Index() {
 
     const classes = useStyles();
+
+    const [ mostSearch, setMostSearched ] = useState([]);
+
+    const [ isLoaded, setIsLoaded ] = useState(false);
+
+    useEffect(() => {
+
+      fetch('/most_searched/4')
+        .then(response => response.json())
+        .then(data => {
+          //console.log(data)
+          setMostSearched(data)
+          setIsLoaded(true)
+        })
+      
+        // eslint-disable-next-line
+    },[])
+
+    function ImageRow(){
+  
+      if(isLoaded){
+        return (
+          <>
+            <Grid direction="row" container spacing={6} style={{marginTop: '30%'}}>
+                <Grid item sm={3}><img src={mostSearch[0].url} alt="D" width='200' height='220' style={{borderRadius: '24px'}}/></Grid>
+                <Grid item sm={3}><img src={mostSearch[1].url} alt="D" width='200' height='220' style={{borderRadius: '24px'}}/></Grid>
+                <Grid item sm={3}><img src={mostSearch[2].url} alt="D" width='200' height='220' style={{borderRadius: '24px'}}/></Grid>
+                <Grid item sm={3}><img src={mostSearch[3].url} alt="D" width='200' height='220' style={{borderRadius: '24px'}}/></Grid> 
+            </Grid>
+          </>
+        )
+      }else{
+        return (
+          <>
+          </>
+        )
+      }
+    }
+
     return (
         <Box className={classes.root}>
           <Header/>
@@ -78,9 +120,13 @@ export default function Index() {
             >
               {subHeadingText}
             </Typography>
+
+            <ImageRow/>
+
           </div>
         </Box>
         
       </Box>
     )
 }
+

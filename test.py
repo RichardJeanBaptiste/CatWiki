@@ -52,9 +52,22 @@ def update_search(test):
         posts.update_one({"name":name}, {"$set": {"searches": temp}})
     
 
-update_search(test)
+#update_search(test)
 
+def most_searched(num):
+    x = []
+    y = []
 
+    for post in posts.find().sort('searches', pymongo.DESCENDING):
+        x.append(post)
+    
+    for index in range(num):
+        y.append(x[index])
+    
+    return y
+
+#print(most_searched(5))
+    
 
 
 

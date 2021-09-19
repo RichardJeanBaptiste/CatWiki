@@ -84,6 +84,23 @@ function DisplayContent(props) {
 
     const ImageList = props.ImageList;
 
+    useEffect(() => {
+
+        let data = {
+            "name": name,
+            "url": ImageList[0].url,
+        }
+
+        fetch('/update_search/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+     // eslint-disable-next-line
+    },[]);
+
     return (
             <>
                 <Box style={{marginLeft: '3.5%', marginTop:'2%'}}>
@@ -207,23 +224,3 @@ export default function CatInfo(props) {
         )
     }
 }
-
-/*
-
-
-<Typography>Other Photos</Typography>
-                <Grid direction="row" container spacing={3}>
-                    <Grid item md={6} sm={3}>
-                        D
-                    </Grid>
-                    <Grid item md={6} sm={3}>
-                        E
-                    </Grid>
-                    <Grid item md={6} sm={3}>
-                        F
-                    </Grid>
-                    <Grid item md={6} sm={3}>
-                        G
-                    </Grid>
-                </Grid>
-*/
