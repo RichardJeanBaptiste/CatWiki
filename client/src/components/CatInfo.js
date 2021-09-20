@@ -89,6 +89,7 @@ function DisplayContent(props) {
         let data = {
             "name": name,
             "url": ImageList[0].url,
+            "description": desc,
         }
 
         fetch('/update_search/', {

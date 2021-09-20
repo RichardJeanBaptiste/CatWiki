@@ -5,12 +5,11 @@ import CatWiki from './CatWikiIcon';
 
 const useStyles = makeStyles({
     root: {
-        position:'absolute',
-        bottom: '-150%',
+        marginTop:'10%',
         backgroundColor: 'black',
         borderRadius: '42px 42px 0px 0px',
         width:'80vw',
-        height: '17vh',
+        height: '25vh',
     },
     innnerRoot: {
         display: 'flex',

@@ -49,6 +49,7 @@ def update_search():
     x = {
         "name": request.json['name'],
         "url": request.json['url'],
+        "description": request.json['description'],
         "searches": 1
     }
     update_search(x)
