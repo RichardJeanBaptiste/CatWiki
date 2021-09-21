@@ -162,13 +162,6 @@ export default function Index() {
                         </Box>
                     </Box>
                    </Box>
-                  {/** Footer */}
-                  <Box style={{position:'sticky'}}>
-                        <Box style={{position:'absolute', bottom:'0'}}>
-                        <Footer />
-                        </Box> 
-                  </Box>
-                  
                      
               </Box>
               
