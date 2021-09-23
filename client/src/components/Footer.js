@@ -19,8 +19,7 @@ const useStyles = makeStyles({
         flexDirection: 'row',
     },
     iconStyle: {
-        marginLeft: '3%',
-        marginTop: '2.5%',
+        marginTop: '1.1%',
     }
 })
 
@@ -35,7 +34,7 @@ export default function Footer() {
                     <Box className={classes.iconStyle}>
                         <CatWiki fill='white' width='35%' height='35%'/>
                     </Box>
-                    <p style={{ color:'white', fontSize:'18px', fontStyle: 'normal', marginLeft: '-30%', marginTop: '3.5%'}}>created by Richinbk - devChallenge.io 2021</p>
+                    <p style={{ color:'white', fontSize:'18px', fontStyle: 'normal', marginLeft: '-65%', marginTop: '2.5%'}}>created by Richinbk - devChallenge.io 2021</p>
                 </Box> 
             </Box>
         </>
