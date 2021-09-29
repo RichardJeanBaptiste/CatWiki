@@ -16,7 +16,6 @@ cryptography==3.3.2
 dbus-python==1.2.16
 distro==1.5.0
 dnspython==2.0.0
-Electrum==4.0.9
 Flask==2.0.1
 Flask-HTTPAuth==3.2.4
 gpg===1.14.0-unknown
