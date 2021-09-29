@@ -6,7 +6,7 @@ import requests
 import json
 from bson import json_util
 
-app = Flask(__name__, static_url_path='', static_folder='client/build')
+app = Flask(__name__, static_url_path='/', static_folder='./build')
 
 client = MongoClient("mongodb+srv://Richinbk:DzIMGBugcZjdMofB@searches.llyga.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 db = client.History
@@ -17,7 +17,8 @@ searches = db.searches
 
 @app.route("/", defaults={'path':''})
 def serve(path):
-    return send_from_directory(app.static_folder, 'index.html')
+    print("server started")
+    return app.send_static_file('index.html')
 
 @app.route("/hello")
 def connect():
