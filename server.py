@@ -6,7 +6,7 @@ import requests
 import json
 from bson import json_util
 
-app = Flask(__name__, static_url_path='/', static_folder='./build')
+app = Flask(__name__, static_folder='./build', static_url_path='/',)
 
 client = MongoClient("mongodb+srv://Richinbk:DzIMGBugcZjdMofB@searches.llyga.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 db = client.History
