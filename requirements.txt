@@ -72,7 +72,6 @@ simplejson==3.17.2
 six==1.15.0
 soupsieve==2.2.1
 stem==1.8.0
-terminator==2.1.0
 torbrowser-launcher==0.3.3
 typing-extensions==3.7.4.3
 ufw==0.36
