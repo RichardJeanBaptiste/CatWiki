@@ -30,7 +30,8 @@ const useStyles = makeStyles({
         width: '275px',
         height: '135px',
         overflow: 'hidden',
-        overflowY: 'scroll'
+        overflowY: 'scroll',
+        zIndex: '2'
     }
 })
 

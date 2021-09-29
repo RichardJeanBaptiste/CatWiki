@@ -116,13 +116,16 @@ export default function DesktopIndex() {
                 <Box className={classes.titleStyle}>
                     <CatWiki fill='white' width='30%' height='30%'/>
                     <p className={classes.introTextStyle}>{introText}</p>
-                    <SearchBar/>
+                    <Box style={{ zIndex: '2'}}>
+                      <SearchBar/>
+                    </Box>
+                    
                 </Box>
               </Box>
               {/** Bottom half intro page */} 
               <Box>
                   <Typography 
-                    style={{fontSize: '18px', color: '#291507', position:'relative', top:'2em', left: '7em'}}
+                    style={{fontSize: '18px', color: '#291507', position:'relative', top:'2em', left: '7em', zIndex: '1'}}
                   >
                   Most Searched Breeds
                   </Typography>
