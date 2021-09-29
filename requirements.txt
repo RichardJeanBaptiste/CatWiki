@@ -13,7 +13,6 @@ click==8.0.1
 colorama==0.4.4
 configobj==5.0.6
 cryptography==3.3.2
-cupshelpers==1.0
 dbus-python==1.2.16
 distro==1.5.0
 dnspython==2.0.0
