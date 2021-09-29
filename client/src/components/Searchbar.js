@@ -88,7 +88,6 @@ export default function SearchBar() {
 
             return (
                 <li
-                    //key={props.key}
                     style={{listStyle:'none',backgroundColor: hoverBackground}}
                     onMouseOver={() => {setHoverBackground(colors[1])}}
                     onMouseLeave={() => {setHoverBackground(colors[0])}}

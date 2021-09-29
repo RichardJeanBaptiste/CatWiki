@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from pymongo import MongoClient
 from bson.json_util import loads
 import pymongo
@@ -6,7 +6,7 @@ import requests
 import json
 from bson import json_util
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='client/build')
 
 client = MongoClient("mongodb+srv://Richinbk:DzIMGBugcZjdMofB@searches.llyga.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 db = client.History
@@ -15,9 +15,9 @@ searches = db.searches
 
 
 
-@app.route("/")
-def hello():
-    return 'abcd'
+@app.route("/", defaults={'path':''})
+def serve(path):
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route("/hello")
 def connect():

@@ -150,7 +150,6 @@ export default function DesktopIndex() {
                         <Box>
                             <Typography style={{width:'12em',fontSize:'48px',lineHeight:'58.51px',fontWeight:'bold', whiteSpace:'pre-wrap',color: '#291507'}}>{"Why should you \nhave a cat?"}</Typography>
                             <Typography style={{marginTop:'10%',fontSize:'18px', lineHeight:'21.94px',color:'#291507',whiteSpace:'pre-wrap'}}>{"Having a cat around you can actually trigger the \nrelease of calming chemicals in your body which \nlower your stress and anxiety leves"}</Typography>
-                            <Typography style={{marginTop:'15%',fontSize:'18px', lineHeight:'22px', color:'rgba(41, 21, 7, 0.6)'}}>READ MORE</Typography>
 
                         </Box>
 
@@ -172,43 +171,3 @@ export default function DesktopIndex() {
     )
 }
 
-
-/*
-
-<Box className={classes.root}>
-          <Header/>
-  
-        <Box className={classes.upperRoot}>
-            <Box className={classes.titleStyle}>
-              <CatWiki fill='white' width='30%' height='30%'/>
-              <p className={classes.introTextStyle}>{introText}</p>
-              <SearchBar/>
-            </Box>
-        </Box>
-
-        <Box className={classes.lowerRoot}>
-          <div style={{marginTop: '25px'}}>
-            <Typography 
-              style={{fontSize: '18px', color: '#291507',position:'absolute', top:'110%', left:'7%'}}
-            >
-              Most Searched Breeds
-            </Typography>
-            <Typography
-              style={{fontSize: '48px', whiteSpace: 'pre-wrap', color: '#291507',position:'absolute', top:'120%', left:'7%'}}
-            >
-              {subHeadingText}
-            </Typography>
-
-            <ImageRow/>
-
-          </div>
-        </Box>
-        
-
-
-
-      </Box>
-
-
-
-*/

@@ -76,7 +76,7 @@ export default function MostSearched(){
                 <Header/>
             </Box>
             <Typography style={{fontSize:'36px', lineHeight:'44px', fontWeight:'bold', color: '#291507', marginLeft:'6%', marginTop:'-2%'}}  >Top 10 most searched breeds</Typography>
-            <Box style={{marginLeft:'6%', width:'85vw', height:'400px', overflow:'scroll'}}>
+            <Box style={{marginTop:'1%',marginLeft:'6%', width:'85vw', height:'40em', overflow:'scroll'}}>
                 <ImageInfo/>
             </Box>
 
